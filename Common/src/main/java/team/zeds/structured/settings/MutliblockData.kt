@@ -39,9 +39,9 @@ class MultiblockConfig {
     var tickOnClient: (Level, BlockPos, BlockState, MultiCoreBlockEntity) -> Unit = { _, _, _, _ -> }
 }
 
-class MultiblockLayer(val yIndex: Int) {
+class MultiblockLayer(private val yIndex: Int) {
     val layer = HashMap<BlockPos, Block>()
-    var zIndex = 0
+    private var zIndex = 0
 
     fun line(vararg blocks: Block) {
         blocks.indices.forEach {
@@ -51,7 +51,7 @@ class MultiblockLayer(val yIndex: Int) {
     }
 }
 
-class OffsetMultiBlockPos(val maxX: Int, val maxY: Int, val maxZ: Int, val direction: Direction) {
+class OffsetMultiBlockPos(private val maxX: Int, private val maxY: Int, private val maxZ: Int, private val direction: Direction) {
     var x: Int = 0
     var y: Int = 0
     var z: Int = 0

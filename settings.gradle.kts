@@ -2,6 +2,7 @@ pluginManagement {
     val kotlin_version: String by settings
     repositories {
         gradlePluginPortal()
+        mavenCentral()
         maven("https://maven.fabricmc.net/")
         maven("https://repo.spongepowered.org/repository/maven-public/")
         maven("https://maven.neoforged.net/releases/")

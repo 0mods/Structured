@@ -4,10 +4,9 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
-import org.spongepowered.asm.mixin.Mutable
 import team.zeds.structured.block.entity.MultiCoreBlockEntity
 import team.zeds.structured.settings.MultiBlockStorage
-import team.zeds.structured.settings.MultiBlockStructure
+import team.zeds.structured.settings.MultiblockStructure
 import team.zeds.structured.settings.MultiblockConfig
 import team.zeds.structured.settings.MultiblockLayer
 
@@ -17,7 +16,11 @@ class MultiblockBuilder {
     private val structure = HashMap<BlockPos, Block>()
     private var yIndex = 0
 
-    fun build(): MultiBlockStructure {
+    /**
+     * Method [build] is the final construction of the [MultiblockBuilder] and returns [MultiblockStructure]
+     * @return [MultiblockStructure]
+     */
+    fun build(): MultiblockStructure {
         for (layer in layers.reversed()) {
             val layerImpl = MultiblockLayer(yIndex)
             layer.invoke(layerImpl)
@@ -27,9 +30,12 @@ class MultiblockBuilder {
         }
 
         MultiBlockStorage.multiBlockActions[config.modelName] = config.onOpen
-        return MultiBlockStructure(structure, config)
+        return MultiblockStructure(structure, config)
     }
 
+    /**
+     * Method [layer] sets which blocks will be used for the multiblock.
+     */
     fun layer(function: MultiblockLayer.() -> Unit): MultiblockBuilder {
         this.layers.add(function)
         return this

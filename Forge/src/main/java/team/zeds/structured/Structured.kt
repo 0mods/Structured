@@ -3,6 +3,8 @@ package team.zeds.structured
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.loading.FMLEnvironment
+import team.zeds.structured.Constants
+import team.zeds.structured.MultiblockBuilder
 import team.zeds.structured.init.Registries
 
 @Mod(Constants.KEY)

@@ -22,6 +22,14 @@ base {
     archivesName.set(baseArchiveName)
 }
 
+sourceSets {
+    main {
+        java.srcDirs("src/disabled")
+        kotlin.srcDirs("src/main/java")
+        resources.srcDirs("src/main/resources")
+    }
+}
+
 minecraft {
     mappings("official", minecraftVersion)
 

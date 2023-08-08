@@ -8,5 +8,8 @@ class Structured: ModInitializer {
     override fun onInitialize() {
         Registries.init()
         MultiblockRegistries.setupMultiblockSystem()
+        MultiblockRegistries.registerMultiblock(MultiblockBuilder().layer {
+            line()
+        }.build())
     }
 }

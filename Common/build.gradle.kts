@@ -21,6 +21,14 @@ base {
     archivesName.set(baseArchiveName)
 }
 
+sourceSets {
+    main {
+        java.srcDirs("src/disabled")
+        kotlin.srcDirs("src/main/java")
+        resources.srcDirs("src/main/resources")
+    }
+}
+
 minecraft {
     version(minecraftVersion)
     runs {
@@ -55,6 +63,7 @@ tasks.processResources {
         expand(buildProps)
     }
 }
+
 publishing {
     publications {
         register("mavenJava", MavenPublication::class) {

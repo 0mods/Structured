@@ -11,7 +11,7 @@ import team.zeds.structured.Constants
 import team.zeds.structured.block.entity.MultiCoreBlockEntity
 import team.zeds.structured.block.entity.MultiModuleBlockEntity
 
-class MultiBlockStructure(val structure: HashMap<BlockPos, Block>, val config: MultiblockConfig) {
+class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: MultiblockConfig) {
     fun tryBuild(level: Level, pos: BlockPos, front: Direction, state: BlockState): Boolean {
         if (!this.hasBlock(level.getBlockState(pos).block)) return false
 

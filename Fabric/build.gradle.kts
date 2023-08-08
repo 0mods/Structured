@@ -19,6 +19,14 @@ base {
     archivesName.set(baseArchiveName)
 }
 
+sourceSets {
+    main {
+        java.srcDirs("src/disabled")
+        kotlin.srcDirs("src/main/java")
+        resources.srcDirs("src/main/resources")
+    }
+}
+
 repositories {
     maven("https://maven.shedaniel.me/")
     maven("https://maven.terraformersmc.com/releases/")
