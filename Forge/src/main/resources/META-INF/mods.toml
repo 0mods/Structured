@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[38,)"
+license="MIT"
+[[mods]]
+modId="structured"
+version="${file.jarVersion}"
+displayName="Structured!"
+authors="AlgorithmLX"
+description='''
+Mod-API for creating Multiblock Structures
+'''
+
+[[dependencies.structured]]
+modId="forge"
+mandatory=true
+versionRange="[38,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.structured]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20,1.21)"
+ordering="NONE"
+side="BOTH"

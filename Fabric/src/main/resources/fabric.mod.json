@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "structured",
+  "version": "${version}",
+  
+  "name": "Structured!",
+  "description": "Mod-API for creating Multiblock Structures",
+  "authors": [
+    "AlgorithmLX"
+  ],
+  "contact": {
+    "sources": "https://github.com/0mods/Structured"
+  },
+  
+  "license": "MIT",
+  "icon": "assets/modid/icon.png",
+  
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "team.zeds.structured.Structured"
+    ],
+    "client": [
+      "team.zeds.structured.StructuredClient"
+    ]
+  },
+  "mixins": [],
+
+  "accessWidener": "structured.accesswidener",
+  
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "minecraft": "1.20.x",
+    "java": ">=17"
+  }
+}
+  
