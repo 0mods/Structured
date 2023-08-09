@@ -31,9 +31,22 @@ private operator fun Vec3i.unaryMinus(): Vec3i {
 }
 
 class MultiblockConfig {
+    /**
+     * Field (or method [set] on java) [modelName] is sets a model name
+     */
     var modelName = ""
+    /**
+     * Field (or method [set] on java) [offset] is sets offset of coordinates by [Vector3d]
+     */
     var offset = Vector3d(0.0, 0.0, 0.0)
+    /**
+     * Field (or method [set] on java) [onOpen] is sets the function if player used a block
+     */
     var onOpen: (Player, BlockPos) -> Unit = { _, _ -> }
+    /**
+     * NOT DOCUMENTED
+     * @since 1.1 added a documentation
+     */
     var render: (BlockEntityRendererProvider.Context) -> BlockEntityRenderer<MultiCoreBlockEntity> = { context -> DefaultMultiblockRenderer(context) }
         set(value) {
             rendersList.add(value)

@@ -1,10 +1,10 @@
 package team.zeds.structured
 
 import net.minecraft.core.BlockPos
-import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.state.BlockState
-import team.zeds.structured.block.entity.MultiCoreBlockEntity
+import team.zeds.structured.api.annots.DontUse
+import team.zeds.structured.api.annots.RenamedTo
+import team.zeds.structured.api.annots.Required
 import team.zeds.structured.settings.MultiBlockStorage
 import team.zeds.structured.settings.MultiblockStructure
 import team.zeds.structured.settings.MultiblockConfig
@@ -34,13 +34,23 @@ class MultiblockBuilder {
     }
 
     /**
-     * Method [layer] sets which blocks will be used for the multiblock.
+     * Method [layer] responsible for which blocks will be installed on a specific multiblock layer.
+     * @param function sets a lines for layer
      */
     fun layer(function: MultiblockLayer.() -> Unit): MultiblockBuilder {
         this.layers.add(function)
         return this
     }
 
+    /**
+     * Method [configure] is the main one for creating a multiblock.
+     *
+     * It sets where the main block will be, what will happen when multiblock is used and whether multiblock will tick
+     *
+     * @param config sets a config
+     */
+    @RenamedTo(value = "config", since = "1.1.0")
+    @Required
     fun configure(config: MultiblockConfig.()-> Unit): MultiblockBuilder {
         this.config = MultiblockConfig().apply(config)
         configList.add(this.config)
@@ -48,6 +58,7 @@ class MultiblockBuilder {
     }
 
     companion object {
+        @DontUse
         @JvmStatic
         val configList: MutableList<MultiblockConfig> = mutableListOf()
     }

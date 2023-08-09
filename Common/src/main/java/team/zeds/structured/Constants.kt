@@ -4,8 +4,8 @@ import net.minecraft.resources.ResourceLocation
 import org.slf4j.*
 
 object Constants {
-    const val MOD_NAME = "Structured!"
-    const val KEY: String = "team/zeds/structured"
+    private const val MOD_NAME = "Structured!"
+    const val KEY: String = "structured"
     @JvmField
     val LOGGER: Logger = LoggerFactory.getLogger(MOD_NAME)
     @JvmStatic

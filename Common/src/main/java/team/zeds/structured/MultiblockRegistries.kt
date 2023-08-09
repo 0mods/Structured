@@ -58,8 +58,9 @@ import team.zeds.structured.settings.MultiblockStructure
  *
  * ```kotlin
  * class MyClass {
+ *      val myFirstMultiblock: MultiblockStructure
  *      init {
- *          MultiblockRegistries.registerMultiblock(
+ *          myFirstMultiblock = MultiblockRegistries.registerMultiblock(
  *              MultiblockBuilder()
  *                  // Multiblock layer of:
  *                  // IAI
@@ -111,7 +112,8 @@ object MultiblockRegistries {
     }
 
     @JvmStatic
-    fun registerMultiblock(structure: MultiblockStructure) {
+    fun registerMultiblock(structure: MultiblockStructure): MultiblockStructure {
         multiblocks!!.add(structure)
+        return structure
     }
 }

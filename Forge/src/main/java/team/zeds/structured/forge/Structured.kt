@@ -14,7 +14,7 @@ class Structured {
 
         if (FMLEnvironment.dist.isClient) {
             for (entry in MultiblockBuilder.configList) {
-                BlockEntityRenderers.register(Registries.multiCoreBlockEntity.get()) { a -> entry.render.invoke(a) }
+                BlockEntityRenderers.register(Registries.multiCoreBlockEntity) { a -> entry.render.invoke(a) }
             }
         }
     }

@@ -7,7 +7,7 @@ import team.zeds.structured.forge.init.Registries
 import team.zeds.structured.platform.services.IPlatformHelper
 
 class ForgePlatformHelper: IPlatformHelper {
-    override fun getMultiCoreBlockEntityType(): BlockEntityType<MultiCoreBlockEntity> = Registries.multiCoreBlockEntity.get()
+    override fun getMultiCoreBlockEntityType(): BlockEntityType<MultiCoreBlockEntity> = Registries.multiCoreBlockEntity
 
-    override fun getMultiModuleBlockEntityType(): BlockEntityType<MultiModuleBlockEntity> = Registries.multiModuleBlockEntity.get()
+    override fun getMultiModuleBlockEntityType(): BlockEntityType<MultiModuleBlockEntity> = Registries.multiModuleBlockEntity
 }

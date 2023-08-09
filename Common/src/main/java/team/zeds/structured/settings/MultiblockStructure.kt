@@ -11,7 +11,10 @@ import team.zeds.structured.Constants
 import team.zeds.structured.block.entity.MultiCoreBlockEntity
 import team.zeds.structured.block.entity.MultiModuleBlockEntity
 
-class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: MultiblockConfig) {
+class MultiblockStructure(private val structure: HashMap<BlockPos, Block>, private val config: MultiblockConfig) {
+    /**
+     * Method [tryBuild] is used in special block/item for generating multiblock structure
+     */
     fun tryBuild(level: Level, pos: BlockPos, front: Direction, state: BlockState): Boolean {
         if (!this.hasBlock(level.getBlockState(pos).block)) return false
 
@@ -37,7 +40,7 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         return false
     }
 
-    private fun place(level: Level, pos: BlockPos, front: Direction, state: BlockState) {
+    fun place(level: Level, pos: BlockPos, front: Direction, state: BlockState) {
         val cornerPos = getCorner(level, pos, front)
 
         level.setBlockAndUpdate(
@@ -65,7 +68,7 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         }
     }
 
-    fun getCorner(level: Level, pos: BlockPos, front: Direction): BlockPos {
+    private fun getCorner(level: Level, pos: BlockPos, front: Direction): BlockPos {
         val offset = OffsetMultiBlockPos(getWidth(), getHeight(), getDepth(), front)
 
         while (true) {
@@ -80,7 +83,7 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         return pos
     }
 
-    fun canPlaceAt(level: Level, pos: BlockPos, front: Direction): Boolean {
+    private fun canPlaceAt(level: Level, pos: BlockPos, front: Direction): Boolean {
         val offset = OffsetMultiBlockPos(getWidth(), getHeight(), getDepth(), front)
 
         while (true) {
@@ -94,7 +97,7 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         return false
     }
 
-    fun checkStructure(level: Level, cornerPos: BlockPos, facing: Direction): Boolean {
+    private fun checkStructure(level: Level, cornerPos: BlockPos, facing: Direction): Boolean {
         when (facing) {
             Direction.EAST -> {
                 for ((blockPos, block) in structure) {
@@ -135,11 +138,11 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         return true
     }
 
-    fun hasBlock(pos: Block): Boolean {
+    private fun hasBlock(pos: Block): Boolean {
         return structure.containsValue(pos)
     }
 
-    fun getWidth(): Int {
+    private fun getWidth(): Int {
         var maxX = 0
 
         for (pos in structure.keys) {
@@ -149,7 +152,7 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         return maxX
     }
 
-    fun getHeight(): Int {
+    private fun getHeight(): Int {
         var maxY = 0
 
         for (pos in structure.keys) {
@@ -159,7 +162,7 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         return maxY
     }
 
-    fun getDepth(): Int {
+    private fun getDepth(): Int {
         var maxZ = 0
 
         for (pos in structure.keys) {
@@ -169,7 +172,7 @@ class MultiblockStructure(val structure: HashMap<BlockPos, Block>, val config: M
         return maxZ
     }
 
-    fun forEachBlock(cornerPos: BlockPos, direction: Direction, action: (BlockPos) -> Unit) {
+    private fun forEachBlock(cornerPos: BlockPos, direction: Direction, action: (BlockPos) -> Unit) {
         when (direction) {
             Direction.EAST -> {
                 for (blockPos in structure.keys) {
