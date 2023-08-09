@@ -35,8 +35,16 @@ class MultiblockConfig {
     var offset = Vector3d(0.0, 0.0, 0.0)
     var onOpen: (Player, BlockPos) -> Unit = { _, _ -> }
     var render: (BlockEntityRendererProvider.Context) -> BlockEntityRenderer<MultiCoreBlockEntity> = { context -> DefaultMultiblockRenderer(context) }
+        set(value) {
+            rendersList.add(value)
+            field = value
+        }
     var tickOnServer: (Level, BlockPos, BlockState, MultiCoreBlockEntity) -> Unit = { _, _, _, _ -> }
     var tickOnClient: (Level, BlockPos, BlockState, MultiCoreBlockEntity) -> Unit = { _, _, _, _ -> }
+
+    companion object {
+        val rendersList: MutableList<(BlockEntityRendererProvider.Context) -> BlockEntityRenderer<MultiCoreBlockEntity>> = mutableListOf()
+    }
 }
 
 class MultiblockLayer(private val yIndex: Int) {

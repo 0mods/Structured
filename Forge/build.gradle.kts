@@ -1,9 +1,10 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     java
     eclipse
     id("net.neoforged.gradle") version ("6.+")
     `maven-publish`
-    kotlin("jvm")
 }
 
 val minecraftVersion: String by project
@@ -12,9 +13,6 @@ val forgeAtsEnabled: String by project
 val modName: String by project
 val modAuthor: String by project
 val modId: String by project
-val coroutines_version: String by project
-val serialization_version: String by project
-val shadow: Configuration by configurations.creating
 
 val baseArchiveName = "${modName}-forge-${minecraftVersion}"
 
@@ -24,9 +22,7 @@ base {
 
 sourceSets {
     main {
-        java.srcDirs("src/disabled")
         kotlin.srcDirs("src/main/java")
-        resources.srcDirs("src/main/resources")
     }
 }
 
@@ -85,17 +81,16 @@ sourceSets.main.get().resources.srcDir("src/generated/resources")
 dependencies {
     minecraft("net.neoforged:forge:${minecraftVersion}-${forgeVersion}")
     compileOnly(project(":Common"))
-    shadow("org.jetbrains.kotlin:kotlin-reflect:${kotlin.coreLibrariesVersion}")
-    shadow("org.jetbrains.kotlin:kotlin-stdlib:${kotlin.coreLibrariesVersion}")
-    shadow("org.jetbrains.kotlin:kotlin-stdlib-common:${kotlin.coreLibrariesVersion}")
-    shadow("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_version}")
-    shadow("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${coroutines_version}")
-    shadow("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${coroutines_version}")
-    shadow("org.jetbrains.kotlinx:kotlinx-serialization-core:${serialization_version}")
-    shadow("org.jetbrains.kotlinx:kotlinx-serialization-json:${serialization_version}")
+//    shadow("org.jetbrains.kotlin:kotlin-reflect:${kotlin.coreLibrariesVersion}")
+//    shadow("org.jetbrains.kotlin:kotlin-stdlib:${kotlin.coreLibrariesVersion}")
+//    shadow("org.jetbrains.kotlin:kotlin-stdlib-common:${kotlin.coreLibrariesVersion}")
+//    shadow("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_version}")
+//    shadow("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${coroutines_version}")
+//    shadow("org.jetbrains.kotlinx:kotlinx-serialization-core:${serialization_version}")
+//    shadow("org.jetbrains.kotlinx:kotlinx-serialization-json:${serialization_version}")
 }
 
-tasks.withType<JavaCompile> {
+tasks.withType<KotlinCompile> {
     source(project(":Common").sourceSets.main.get().allSource)
 }
 
@@ -105,6 +100,8 @@ tasks.processResources {
 
 tasks {
     jar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
         finalizedBy("reobfJar")
     }
 }

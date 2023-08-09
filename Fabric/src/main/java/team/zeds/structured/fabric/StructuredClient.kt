@@ -1,9 +1,9 @@
-package team.zeds.structured
+package team.zeds.structured.fabric
 
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 import team.zeds.structured.MultiblockBuilder
-import team.zeds.structured.init.Registries
+import team.zeds.structured.fabric.init.Registries
 
 class StructuredClient: ClientModInitializer {
     override fun onInitializeClient() {

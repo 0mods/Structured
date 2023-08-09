@@ -18,10 +18,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "team.zeds.structured.Structured"
+      "team.zeds.structured.fabric.Structured"
     ],
     "client": [
-      "team.zeds.structured.StructuredClient"
+      "team.zeds.structured.fabric.StructuredClient"
     ]
   },
   "mixins": [],

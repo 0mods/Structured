@@ -41,16 +41,6 @@ class MultiblockBuilder {
         return this
     }
 
-    fun serverTick(function: (Level, BlockPos, BlockState, MultiCoreBlockEntity) -> Unit): MultiblockBuilder {
-        this.config.tickOnServer = function
-        return this
-    }
-
-    fun clientTick(function: (Level, BlockPos, BlockState, MultiCoreBlockEntity) -> Unit): MultiblockBuilder {
-        this.config.tickOnServer = function
-        return this
-    }
-
     fun configure(config: MultiblockConfig.()-> Unit): MultiblockBuilder {
         this.config = MultiblockConfig().apply(config)
         configList.add(this.config)

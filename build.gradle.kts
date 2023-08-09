@@ -1,14 +1,19 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import java.text.SimpleDateFormat
 import java.util.*
 
 val minecraftVersion: String by project
 val modName: String by project
 val modAuthor: String by project
+val kotlin_version: String by project
 
 plugins {
     java
     idea
-    kotlin("jvm")
+    kotlin("jvm") version "1.9.0"
+    kotlin("plugin.serialization") version "1.9.0"
+    id("org.jetbrains.dokka") version "1.8.20"
+    id("com.github.johnrengelman.shadow") version "8.+"
 }
 
 allprojects {
@@ -29,6 +34,13 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
+    apply(plugin = "org.jetbrains.dokka")
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    configurations {
+        implementation.get().extendsFrom(this["shadow"])
+    }
 
     extensions.configure<JavaPluginExtension> {
         toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -36,7 +48,26 @@ subprojects {
         withSourcesJar()
     }
 
+    dependencies {
+        val coroutines_version: String by project
+        val serialization_version: String by project
+        val shadow = configurations["shadow"]
+        shadow("org.jetbrains.kotlin:kotlin-reflect:${kotlin.coreLibrariesVersion}")
+        shadow("org.jetbrains.kotlin:kotlin-stdlib:${kotlin.coreLibrariesVersion}")
+        shadow("org.jetbrains.kotlin:kotlin-stdlib-common:${kotlin.coreLibrariesVersion}")
+        shadow("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_version}")
+        shadow("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${coroutines_version}")
+        shadow("org.jetbrains.kotlinx:kotlinx-serialization-core:${serialization_version}")
+        shadow("org.jetbrains.kotlinx:kotlinx-serialization-json:${serialization_version}")
+    }
+
     tasks {
+        getByName("build").dependsOn("shadowJar")
+        getByName<ShadowJar>("shadowJar") {
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+            configurations = listOf(project.configurations.getByName("shadow"))
+        }
         jar {
             manifest {
                 attributes(
@@ -53,11 +84,6 @@ subprojects {
                 )
             }
         }
-    }
-
-    tasks.withType<JavaCompile> {
-        options.encoding = "UTF-8"
-        options.release.set(17)
     }
 
     kotlin {

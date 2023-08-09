@@ -1,4 +1,4 @@
-package team.zeds.structured.init
+package team.zeds.structured.forge.init
 
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks

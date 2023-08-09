@@ -1,11 +1,11 @@
-package team.zeds.structured
+package team.zeds.structured.forge
 
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.loading.FMLEnvironment
 import team.zeds.structured.Constants
 import team.zeds.structured.MultiblockBuilder
-import team.zeds.structured.init.Registries
+import team.zeds.structured.forge.init.Registries
 
 @Mod(Constants.KEY)
 class Structured {

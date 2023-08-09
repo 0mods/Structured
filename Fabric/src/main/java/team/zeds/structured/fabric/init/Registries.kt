@@ -1,4 +1,4 @@
-package team.zeds.structured.init
+package team.zeds.structured.fabric.init
 
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
