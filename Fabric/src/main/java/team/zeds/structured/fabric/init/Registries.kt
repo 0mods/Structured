@@ -2,7 +2,6 @@ package team.zeds.structured.fabric.init
 
 import net.minecraft.core.Registry
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import team.zeds.structured.Constants.reloc
@@ -14,7 +13,7 @@ import team.zeds.structured.block.entity.MultiModuleBlockEntity
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Registries {
     val multiCoreBlock = MultiCoreBlock()
-    val multiModuleBlock = MultiModuleBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(0.3f).noOcclusion())
+    val multiModuleBlock = MultiModuleBlock(BlockBehaviour.Properties.of().strength(0.3f).noOcclusion())
 
     val multiCoreBlockEntity: BlockEntityType<MultiCoreBlockEntity> =
         BlockEntityType.Builder.of({ pos, state -> MultiCoreBlockEntity(pos, state) }, multiCoreBlock).build(null)

@@ -1,6 +1,5 @@
 package team.zeds.structured.forge.init
 
-import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraftforge.registries.ForgeRegistries
@@ -13,7 +12,7 @@ import team.zeds.structured.block.entity.MultiModuleBlockEntity
 object Registries {
     val multiCoreBlock = MultiCoreBlock()
     val multiModuleBlock =
-        MultiModuleBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(0.3f).noOcclusion())
+        MultiModuleBlock(BlockBehaviour.Properties.of().strength(0.3f).noOcclusion())
 
     val multiCoreBlockEntity: BlockEntityType<MultiCoreBlockEntity> =
         BlockEntityType.Builder.of({ pos, state -> MultiCoreBlockEntity(pos, state) }, multiCoreBlock).build(null)

@@ -14,7 +14,7 @@ import team.zeds.structured.api.EntityBlockBase
 import team.zeds.structured.block.entity.MultiCoreBlockEntity
 
 class MultiCoreBlock: EntityBlockBase<MultiCoreBlockEntity>({ pos, state-> MultiCoreBlockEntity(pos, state) },
-    Properties.copy(Blocks.IRON_BLOCK).noOcclusion().strength(0.3f)) {
+    Properties.of().noOcclusion().strength(0.3f)) {
     @Deprecated("Deprecated in Java")
     override fun onRemove(state: BlockState, level: Level, pos: BlockPos, newState: BlockState, isMoving: Boolean) {
         level.getBlockEntity(pos)?.let { (it as MultiCoreBlockEntity).breakMultiBlock() }
